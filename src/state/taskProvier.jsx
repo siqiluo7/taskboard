@@ -14,6 +14,11 @@ const initialState = {
   filter: "all", // all, active (incomplete), completed
 };
 
+/*
+ * TaskProvider provides the task context to its children.
+ * It uses the TaskReducer to manage the state of tasks and provides actions to manipulate tasks.
+ * It talks to the taskService to load task on mounting, and to create, update, and delete tasks on every action.
+ */
 export const TaskProvider = ({ children }) => {
   const [taskList, dispatch] = useReducer(TaskReducer, initialState);
 

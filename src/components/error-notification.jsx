@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import { TaskContext } from "../state/taskContext";
 
+/**
+ * ErrorNotification component displays an error message if there is an error in the TaskContext.
+ * */
 export const ErrorNotification = () => {
   const { state } = useContext(TaskContext);
 

@@ -32,6 +32,9 @@ A simple task board application built with React, vite and tailwind.
 
 ## Architecture
 
+The application follows Dependency Inversion Principle in a way the components only interact with the state management layer which is taskContext. It makes
+sure single responsibility by keeping persistence logic in a isolated TaskService which handles data storage to local storage or remote in the future and reducer only deals with state trainsition. This separation of concerns allows for easy testing (mockable service layer) and no component changes needed when switching persistence methods.
+
 ### Data flow
 
 ```
@@ -39,17 +42,23 @@ UI Components → Context Actions → Task Service → LocalStorage
 (Triggers)       (Dispatches)     (Persists)        (Storage)
 ```
 
-The application is structured in a way the components only interact with the state management layer which is taskContext, while the taskService handles data storage to local storage or remote in the future. This separation of concerns allows for easy testing (mockable service layer) and no component changes needed when switching persistence methods.
-
 - **src**
   - **components**: contains all the UI components.
   - **state**: contains context and reducer for state management.
-  - **services**: contains persistence services to localStorage.
+  - **services**: contains task persistence services to get/save tasks to localStorage.
 
-## Design
+## Design Decisions
 
 1. State management: uses Context API and useReducer for centralized state management. I don't use Redux or other state management library because it's overkill for this simple app.
 
 2. API: implemented simple CRUD operations which to be consisit with user intention and focus on performance and scalability.
 
-3. Error handling: implemented a centralized error handling mechanism to catch and log errors during storage operations. Currently, it logs and displays errors, the error will be cleareed after the next successful operation. In the future, it can be implement a auto retry and more sophisticated error handling mechanism to handle different types of errors and provide better user feedback.
+3. Error handling: there are three types of errors that can occur in the application:
+   Validation Errors (Invalid input)
+   Persistence Errors (Storage failures)
+   Application Errors (Unexpected failures)
+
+Validation error is dislayed at form level when user hit add task.
+
+Persistence Errors and Application Errors are handled at the service level. I have
+implemented a centralized error handling mechanism to catch and log errors during storage operations. Currently, it logs and displays errors (`ErrorNotification` component), the error will be cleared after the next successful operation. In the future, it can be implement a auto retry and more sophisticated error handling mechanism to handle different types of errors and provide better user feedback.
