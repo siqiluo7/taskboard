@@ -3,6 +3,7 @@ A simple task board application built with React, vite and tailwind.
 ## Features
 
 - Create, toggle task completion status, and delete tasks.
+- Filter tasks by status (all, active, completed).
 - Persistent storage using localStorage.
 
 ## Installation
@@ -53,12 +54,11 @@ UI Components → Context Actions → Task Service → LocalStorage
 
 2. API: implemented simple CRUD operations which to be consisit with user intention and focus on performance and scalability.
 
-3. Error handling: there are three types of errors that can occur in the application:
+3. Error handling: there are three types of errors that can occur:
    Validation Errors (Invalid input)
    Persistence Errors (Storage failures)
    Application Errors (Unexpected failures)
 
-Validation error is dislayed at form level when user hit add task.
+Validation error is dislayed at form level when user hit add task which provides immediate feedback to the user.
 
-Persistence Errors and Application Errors are handled at the service level. I have
-implemented a centralized error handling mechanism to catch and log errors during storage operations. Currently, it logs and displays errors (`ErrorNotification` component), the error will be cleared after the next successful operation. In the future, it can be implement a auto retry and more sophisticated error handling mechanism to handle different types of errors and provide better user feedback.
+Persistence Errors and Application Errors are handled at the service level. I implemented a centralized error handling mechanism to catch and log errors during storage operations. Currently, it logs and displays errors (`ErrorNotification` component), the error will be cleared after the next successful operation. In the future, it can be implement a auto retry and more sophisticated error handling mechanism to handle different types of errors and provide better user feedback.
