@@ -3,7 +3,7 @@
  * */
 export const loadTasks = async () => {
   try {
-    return JSON.parse(localStorage.getItem("tasks")) || [];
+    return getTasksFromLocalStorage();
   } catch (error) {
     console.error("Load Error:", error);
     throw new Error("Failed to load tasks");
@@ -12,9 +12,9 @@ export const loadTasks = async () => {
 
 export const createTask = async (task) => {
   try {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const tasks = getTasksFromLocalStorage();
     const newTasks = [...tasks, task];
-    localStorage.setItem("tasks", JSON.stringify(newTasks));
+    setTasksToLocalStorage(newTasks);
     return task;
   } catch (error) {
     console.error("Create Error:", error);
@@ -24,11 +24,11 @@ export const createTask = async (task) => {
 
 export const updateTask = async (taskId, updates) => {
   try {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const tasks = getTasksFromLocalStorage();
     const updatedTasks = tasks.map((t) =>
       t.id === taskId ? { ...t, ...updates } : t
     );
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    setTasksToLocalStorage(updatedTasks);
     return updatedTasks.find((t) => t.id === taskId);
   } catch (error) {
     console.error("Update Error:", error);
@@ -38,12 +38,21 @@ export const updateTask = async (taskId, updates) => {
 
 export const deleteTask = async (taskId) => {
   try {
-    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    const tasks = getTasksFromLocalStorage();
     const filteredTasks = tasks.filter((t) => t.id !== taskId);
-    localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+    setTasksToLocalStorage(filteredTasks);
     return taskId;
   } catch (error) {
     console.error("Delete Error:", error);
     throw new Error("Failed to delete task");
   }
+};
+
+const getTasksFromLocalStorage = () => {
+  const tasks = localStorage.getItem("tasks");
+  return tasks ? JSON.parse(tasks) : [];
+};
+
+const setTasksToLocalStorage = (tasks) => {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 };
