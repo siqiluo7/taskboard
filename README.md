@@ -62,3 +62,5 @@ UI Components → Context Actions → Task Service → LocalStorage
 Validation error is dislayed at form level when user hit add task which provides immediate feedback to the user.
 
 Persistence Errors and Application Errors are handled at the service level. I implemented a centralized error handling mechanism to catch and log errors during storage operations. Currently, it logs and displays errors (`ErrorNotification` component), the error will be cleared after the next successful operation. In the future, it can be implement a auto retry and more sophisticated error handling mechanism to handle different types of errors and provide better user feedback.
+
+To mock a persistence error, you can add a task and manually clear the local storage, then try toggle the task status by checking/unchecking the checkbox. The error will be displayed in the UI.

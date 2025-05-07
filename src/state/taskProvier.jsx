@@ -52,6 +52,11 @@ export const TaskProvider = ({ children }) => {
         const updatedTask = await updateTask(taskId, {
           completed: !task.completed,
         });
+        if (!updatedTask) {
+          throw new Error(
+            "Error updating task, Please try again or refresh the page"
+          );
+        }
         dispatch({ type: "UPDATE_TASK", payload: updatedTask });
         dispatch({ type: "CLEAR_ERROR" });
       } catch (error) {
