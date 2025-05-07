@@ -15,7 +15,7 @@ A simple task board application built with React, vite and tailwind.
 
 2. Navigate to the project directory:
    ```bash
-   cd task-board-app
+   cd taskboard
    ```
 3. Install dependencies:
    ```bash
