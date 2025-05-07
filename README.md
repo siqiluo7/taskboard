@@ -34,7 +34,7 @@ A simple task board application built with React, vite and tailwind.
 
 ### Data flow
 
-```mermaid
+```
 UI Components → Context Actions → Task Service → LocalStorage
 (Triggers)       (Dispatches)     (Persists)        (Storage)
 ```
