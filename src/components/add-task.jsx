@@ -5,7 +5,7 @@ export const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
-  const { dispatch } = useContext(TaskContext);
+  const { actions } = useContext(TaskContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,11 +14,14 @@ export const AddTask = () => {
       return;
     }
 
-    dispatch({
-      type: "ADD_TASK",
-      payload: { id: Date.now(), title, description, completed: false },
+    actions.addTask({
+      id: Date.now(),
+      title,
+      description,
+      completed: false,
     });
 
+    // reset input fields and error message
     setTitle("");
     setDescription("");
     setError("");

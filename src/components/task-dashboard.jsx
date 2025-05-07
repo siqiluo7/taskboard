@@ -6,6 +6,7 @@ import { TaskFilter } from "./task-filter";
 
 export const TaskDashboard = () => {
   const { state } = useContext(TaskContext);
+
   const filteredTasks = state.tasks.filter((task) => {
     if (state.filter === "completed") {
       return task.completed;

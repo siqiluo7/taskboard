@@ -22,15 +22,6 @@ export const TaskReducer = (state, action) => {
           task.id === action.payload.id ? action.payload : task
         ),
       };
-    case "TOGGLE_TASK":
-      return {
-        ...state,
-        tasks: state.tasks.map((task) =>
-          task.id === action.payload.id
-            ? { ...action.payload, completed: !action.payload.completed }
-            : task
-        ),
-      };
     case "SET_ERROR":
       return {
         ...state,
